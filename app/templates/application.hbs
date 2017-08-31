@@ -4,9 +4,15 @@
   allSelected=allSelected
   noneSelected=noneSelected
   unreadMessages=unreadMessages
+  showComposeForm=showComposeForm
   applyLabel=(action "applyLabel")
   removeLabel=(action "removeLabel")
+  toggleComposeForm=(action "toggleComposeForm")
 }}{{/tool-bar}}
+
+{{#if showComposeForm}}
+{{compose-form}}
+{{/if}}
 
 {{#each model as |message|}}
 {{inbox-messages

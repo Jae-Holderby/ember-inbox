@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   allSelected: false,
   someSelected: false,
   noneSelected: true,
+  showComposeForm: false,
   unreadMessages: Ember.computed(countUnread),
   actions: {
 
@@ -66,6 +67,14 @@ export default Ember.Controller.extend({
        Ember.set(model, "labels", array)
        }
      })
+   },
+   toggleComposeForm(){
+     let showing = this.get('showComposeForm')
+     if(showing){
+       this.set('showComposeForm', false)
+     } else {
+       this.set('showComposeForm', true)
+     }
    }
   }
 });

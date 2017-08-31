@@ -5,45 +5,44 @@ export default Ember.Component.extend({
 
   actions: {
 
-
-      toggleChecked() {
-        let model = this.get('model')
-        this.toggleProperty("allSelected")
-        this.set("someSelected", false)
-          model.forEach((model) => {
-            if(this.get('allSelected')) {
-              Ember.set(model, 'selected', true)
-              this.set('noneSelected', false)
-            } else {
-              Ember.set(model, 'selected', false)
-              this.set('noneSelected', true)
-            }
-          });
-      },
-    markRead() {
-      let model = this.get('model')
+  toggleChecked() {
+    let model = this.get('model')
+    this.toggleProperty("allSelected")
+    this.set("someSelected", false)
       model.forEach((model) => {
-        if(model.selected){
-          Ember.set(model, 'read', true)
+        if(this.get('allSelected')) {
+          Ember.set(model, 'selected', true)
+          this.set('noneSelected', false)
+        } else {
+          Ember.set(model, 'selected', false)
+          this.set('noneSelected', true)
         }
-      })
-      this.set("unreadMessages", countUnread(model))
-    },
-    markUnread() {
-      let model = this.get('model')
-      model.forEach((model) => {
-        if(model.selected){
-          Ember.set(model, 'read', false)
-        }
-      })
-      this.set("unreadMessages", countUnread(model))
-    },
-    applyLabel(){
-      this.get('applyLabel')()
-    },
-   removeLabel(){
-     this.get('removeLabel')()
-   },
+      });
+  },
+  markRead() {
+    let model = this.get('model')
+    model.forEach((model) => {
+      if(model.selected){
+        Ember.set(model, 'read', true)
+      }
+    })
+    this.set("unreadMessages", countUnread(model))
+  },
+  markUnread() {
+    let model = this.get('model')
+    model.forEach((model) => {
+      if(model.selected){
+        Ember.set(model, 'read', false)
+      }
+    })
+    this.set("unreadMessages", countUnread(model))
+  },
+  applyLabel(){
+    this.get('applyLabel')()
+  },
+ removeLabel(){
+   this.get('removeLabel')()
+ },
   hide(unreadMessages){
     let model = this.get('model')
     model.forEach((model) => {
@@ -70,6 +69,9 @@ export default Ember.Component.extend({
         this.set('noneSelected', false)
       }
       this.set("unreadMessages", countUnread(model))
+    },
+    toggleComposeForm(){
+      this.get("toggleComposeForm")();
     }
   }
 });
