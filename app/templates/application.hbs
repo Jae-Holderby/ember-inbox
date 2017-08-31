@@ -1,5 +1,22 @@
-{{#tool-bar model=model}}{{/tool-bar}}
+{{#tool-bar
+  model=model
+  someSelected=someSelected
+  allSelected=allSelected
+  noneSelected=noneSelected
+  unreadMessages=unreadMessages
+  applyLabel=(action "applyLabel")
+  removeLabel=(action "removeLabel")
+}}{{/tool-bar}}
 
 {{#each model as |message|}}
-{{#inbox-messages message=message}}{{/inbox-messages}}
+{{inbox-messages
+   message=message
+   model=model
+   someSelected=someSelected
+   allSelected=allSelected
+   noneSelected=noneSelected
+   toggleStar=(action "toggleStar")
+   toggleCheck=(action "toggleCheck")
+  }}
+
 {{/each}}

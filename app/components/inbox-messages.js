@@ -6,22 +6,23 @@ export default Ember.Component.extend({
 
   actions: {
 
-    toggleCheck() {
-      let message = this.get('message')
-      if (message.selected){
-        Ember.set(message, "selected", false)
+    toggleCheck(){
+      let message = this.get("message")
+      this.get("toggleCheck")(message)
+    },
+    toggleStar(){
+      let message = this.get("message");
+      this.get("toggleStar")(message);
+    },
+    toggleMessage(){
+      let message = this.get("message")
+      if(message.expanded){
+        Ember.set(message, 'expanded', false)
       } else {
-        Ember.set(message, "selected", true)
-        }
-      },
-
-    toggleStar() {
-      let message = this.get('message')
-      if (message.starred){
-        Ember.set(message, "starred", false)
-      } else {
-        Ember.set(message, "starred", true)
-        }
+        Ember.set(message, 'expanded', true)
       }
+
+    }
+
   }
 });

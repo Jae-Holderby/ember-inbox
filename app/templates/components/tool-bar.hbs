@@ -1,6 +1,6 @@
   <div class="col-md-12">
     <p class="pull-right">
-      <span class="badge badge">4</span>
+      <span class="badge badge">{{unreadMessages}}</span>
       unread messages
     </p>
 
@@ -8,29 +8,38 @@
       <i class="fa fa-plus"></i>
     </a>
 
-    <button class="btn btn-default check-box">
+    <button class="btn btn-default check-box"
+      {{action "toggleChecked"}}>
+      {{#if allSelected}}
+      <i class="fa fa-check-square-o"></i>
+      {{else if someSelected}}
+      <i class="fa fa-minus-square-o"></i>
+      {{else if noneSelected}}
       <i class="fa fa-square-o"></i>
+      {{/if}}
     </button>
 
-    <button class="btn btn-default">Mark As Read</button>
+    <button class="btn btn-default"
+    {{action "markRead"}}>Mark As Read</button>
 
-    <button class="btn btn-default">Mark As Unread</button>
+    <button class="btn btn-default"
+    {{action "markUnread"}}>Mark As Unread</button>
 
-    <select class="form-control label-select">
-      <option>Apply label</option>
+    <select name='label' class="form-control label-select" onchange={{action "applyLabel"}} value='target.value'>
+      <option hidden>Apply label</option>
       <option value="dev">dev</option>
       <option value="personal">personal</option>
       <option value="gschool">gschool</option>
     </select>
 
-    <select class="form-control label-select">
-      <option>Remove label</option>
+    <select class="form-control label-select" onchange={{action "removeLabel"}}>
+      <option hidden>Remove label</option>
       <option value="dev">dev</option>
       <option value="personal">personal</option>
       <option value="gschool">gschool</option>
     </select>
 
-    <button class="btn btn-default">
+    <button {{action "hide"}} class="btn btn-default">
       <i class="fa fa-trash-o"></i>
     </button>
   </div>

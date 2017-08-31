@@ -4,7 +4,7 @@ let messages =[
   {
     "id": 1,
     "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
-    "read": false,
+    "read": true,
     "starred": true,
     "selected": false,
     "labels": ["dev", "personal"]
@@ -14,7 +14,7 @@ let messages =[
     "subject": "connecting the system won't do anything, we need to input the mobile AI panel!",
     "read": false,
     "starred": false,
-    "selected": true,
+    "selected": false,
     "labels": []
   },
   {

@@ -1,4 +1,4 @@
-<div class="row message {{if read "read" "unread"}} {{if message.selected "selected" ""}}">
+<div class="row message {{if message.read "read" "unread"}} {{if message.selected "selected" ""}} {{if message.deleted 'hidden' ''}} ">
   <div class="col-xs-1">
     <div class="row">
       <div class="col-xs-2">
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-11">
+  <div class="col-xs-11" {{action "toggleMessage"}}>
     {{#each message.labels key="@index" as |label|}}
       <span class="label label-warning">{{label}}</span>
     {{/each}}
@@ -18,3 +18,6 @@
     </a>
   </div>
 </div>
+{{#if message.expanded}}
+{{message-expanded}}
+{{/if}}
