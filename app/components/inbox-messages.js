@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
     toggleCheck(){
       let message = this.get("message")
-      this.get("toggleCheck")(message)
+      this.get("toggleCheck")(message);
     },
     toggleStar(){
       let message = this.get("message");

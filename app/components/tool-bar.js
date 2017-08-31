@@ -5,19 +5,8 @@ export default Ember.Component.extend({
 
   actions: {
 
-  toggleChecked() {
-    let model = this.get('model')
-    this.toggleProperty("allSelected")
-    this.set("someSelected", false)
-      model.forEach((model) => {
-        if(this.get('allSelected')) {
-          Ember.set(model, 'selected', true)
-          this.set('noneSelected', false)
-        } else {
-          Ember.set(model, 'selected', false)
-          this.set('noneSelected', true)
-        }
-      });
+  toggleChecked(){
+    this.get('toggleChecked')();
   },
   markRead() {
     let model = this.get('model')

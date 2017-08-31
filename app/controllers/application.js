@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   noneSelected: true,
   showComposeForm: false,
   unreadMessages: Ember.computed(countUnread),
+
   actions: {
 
     //inbox-message functions
@@ -75,6 +76,20 @@ export default Ember.Controller.extend({
      } else {
        this.set('showComposeForm', true)
      }
+   },
+   toggleChecked() {
+     let model = this.get('model')
+     this.toggleProperty("allSelected")
+     this.set("someSelected", false)
+       model.forEach((model) => {
+         if(this.get('allSelected')) {
+           Ember.set(model, 'selected', true)
+           this.set('noneSelected', false)
+         } else {
+           Ember.set(model, 'selected', false)
+           this.set('noneSelected', true)
+         }
+       });
    }
   }
 });
