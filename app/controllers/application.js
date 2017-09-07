@@ -12,15 +12,15 @@ export default Ember.Controller.extend({
     //inbox-message functions
 
     toggleCheck(message) {
-      let model = this.get('model')
+      let model = this.get('model.messages').content
       let toolbar = this.get('toolbar')
-      if (message.selected){
-        Ember.set(message, "selected", false)
+      if (message._data.selected){
+        Ember.set(message._data, "selected", false)
       } else {
-        Ember.set(message, "selected", true)
+        Ember.set(message._data, "selected", true)
         }
         var messagesSelected = model.filter((messages) => {
-          return messages.selected === true
+          return message._data.selected === true
         })
         if(messagesSelected.length === model.length){
           this.set('allSelected', true)
@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
         }
       },
 
-    //tool-bar functions
+
 
     toggleStar(message) {
       if (message.starred){
@@ -47,28 +47,31 @@ export default Ember.Controller.extend({
         }
       },
 
+  //tool-bar functions
+
     applyLabel(){
-     let model = this.get('model')
+     let model = this.get('model').messages.content
      let addLabel = event.srcElement.value
      model.forEach((model) => {
-       if(model.selected && !model.labels.includes(addLabel)) {
-       Ember.set(model, "labels", [addLabel].concat(model.labels).sort())
+       if(model._data.selected && !model._data.labels.includes(addLabel)) {
+       Ember.set(model._data, "labels", [addLabel].concat(model._data.labels).sort())
        }
      })
    },
 
     removeLabel(){
-     let model = this.get('model')
+     let model = this.get('model').messages.content
      let removeLabel = event.srcElement.value
      model.forEach((model) => {
-       if(model.selected) {
-       let array = model.labels.filter((label) => {
+       if(model._data.selected) {
+       let array = model._data.labels.filter((label) => {
            return label !== removeLabel
          })
-       Ember.set(model, "labels", array)
+       Ember.set(model._data, "labels", array)
        }
      })
    },
+
    toggleComposeForm(){
      let showing = this.get('showComposeForm')
      if(showing){
@@ -78,24 +81,23 @@ export default Ember.Controller.extend({
      }
    },
    toggleChecked() {
-     let model = this.get('model')
+     let model = this.get('model').messages.content
      this.toggleProperty("allSelected")
      this.set("someSelected", false)
        model.forEach((model) => {
          if(this.get('allSelected')) {
-           Ember.set(model, 'selected', true)
+           Ember.set(model._data, 'selected', true)
            this.set('noneSelected', false)
          } else {
-           Ember.set(model, 'selected', false)
+           Ember.set(model._data, 'selected', false)
            this.set('noneSelected', true)
          }
        });
    }
   }
 });
-
 function countUnread(){
-  return this.get('model').filter((message) => {
-      return message.read === false
+  return this.get('model.messages.content').filter((message) => {
+      return message._data.read === false
   }).length
 }

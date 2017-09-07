@@ -1,5 +1,5 @@
 {{#tool-bar
-  model=model
+  model=model.messages.content
   someSelected=someSelected
   allSelected=allSelected
   noneSelected=noneSelected
@@ -16,10 +16,10 @@
 {{compose-form}}
 {{/if}}
 
-{{#each model as |message|}}
+{{#each model.messages.content as |message|}}
 {{inbox-messages
    message=message
-   model=model
+   model=model.messages.content
    someSelected=someSelected
    allSelected=allSelected
    noneSelected=noneSelected

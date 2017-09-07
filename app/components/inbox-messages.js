@@ -11,11 +11,11 @@ export default Ember.Component.extend({
       this.get("toggleCheck")(message);
     },
     toggleStar(){
-      let message = this.get("message");
+      let message = this.get("message")._data;
       this.get("toggleStar")(message);
     },
     toggleMessage(){
-      let message = this.get("message")
+      let message = this.get("message")._data
       if(message.expanded){
         Ember.set(message, 'expanded', false)
       } else {

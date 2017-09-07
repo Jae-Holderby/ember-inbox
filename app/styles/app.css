@@ -14,7 +14,7 @@
   text-decoration: none;
 }
 
-.message + .message {
+.message {
   border-top: 1px solid #efefef;
 }
 

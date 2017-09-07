@@ -11,8 +11,8 @@ export default Ember.Component.extend({
   markRead() {
     let model = this.get('model')
     model.forEach((model) => {
-      if(model.selected){
-        Ember.set(model, 'read', true)
+      if(model._data.selected){
+        Ember.set(model._data, 'read', true)
       }
     })
     this.set("unreadMessages", countUnread(model))
@@ -20,8 +20,8 @@ export default Ember.Component.extend({
   markUnread() {
     let model = this.get('model')
     model.forEach((model) => {
-      if(model.selected){
-        Ember.set(model, 'read', false)
+      if(model._data.selected){
+        Ember.set(model._data, 'read', false)
       }
     })
     this.set("unreadMessages", countUnread(model))
@@ -35,14 +35,14 @@ export default Ember.Component.extend({
   hide(unreadMessages){
     let model = this.get('model')
     model.forEach((model) => {
-      if(model.selected){
-        Ember.set(model, 'deleted', true)
-        Ember.set(model, "selected", false)
-        Ember.set(model, "read", true)
+      if(model._data.selected){
+        Ember.set(model._data, 'deleted', true)
+        Ember.set(model._data, "selected", false)
+        Ember.set(model._data, "read", true)
         }
       })
       var messagesSelected = model.filter((messages) => {
-        return messages.selected === true
+        return messages._data.selected === true
       })
       if(messagesSelected.length === model.length){
         this.set('allSelected', true)
@@ -67,6 +67,6 @@ export default Ember.Component.extend({
 
 function countUnread(model){
     return model.filter((message) => {
-      return message.read === false
+      return message._data.read === false
   }).length
 }

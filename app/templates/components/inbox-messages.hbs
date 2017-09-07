@@ -1,24 +1,24 @@
-<div class="row message {{if message.read "read" "unread"}} {{if message.selected "selected" ""}} {{if message.deleted 'hidden' ''}} ">
+<div class="row message {{if message._data.read "read" "unread"}} {{if message._data.selected "selected" ""}} {{if message._data.deleted 'hidden' ''}} ">
   <div class="col-xs-1">
     <div class="row">
       <div class="col-xs-2">
-        <input class="checkbox" type="checkbox" onchange={{action "toggleCheck"}} checked={{if message.selected 'checked' ''}}/>
+        <input class="checkbox" type="checkbox" onchange={{action "toggleCheck"}} checked={{if message._data.selected 'checked' ''}}/>
       </div>
       <div class="col-xs-2">
-        <i class="star star fa fa-star{{if message.starred "" "-o"}}" {{action "toggleStar"}} ></i>
+        <i class="star star fa fa-star{{if message._data.starred "" "-o"}}" {{action "toggleStar"}} ></i>
       </div>
     </div>
   </div>
   <div class="col-xs-11" {{action "toggleMessage"}}>
-    {{#each message.labels key="@index" as |label|}}
+    {{#each message._data.labels key="@index" as |label|}}
       <span class="label label-warning">{{label}}</span>
     {{/each}}
     <a href="#">
-      {{message.subject}}
+      {{message._data.subject}}
     </a>
   </div>
 </div>
 
-{{#if message.expanded}}
+{{#if message._data.expanded}}
   {{message-expanded}}
 {{/if}}
